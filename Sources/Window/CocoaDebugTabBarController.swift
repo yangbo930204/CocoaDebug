@@ -13,7 +13,8 @@ class CocoaDebugTabBarController: UITabBarController {
     //MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor.black
+
         UIApplication.shared.keyWindow?.endEditing(true)
         
         setChildControllers()
