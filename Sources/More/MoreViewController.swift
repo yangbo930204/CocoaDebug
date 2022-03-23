@@ -7,23 +7,160 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+public typealias SelectFinishNetworkCallBack = () -> Void
 
+class MoreViewController: UIViewController {
+    
+    var bgView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bgView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 290))
+//        bgView.backgroundColor = UIColor.red
+        view.addSubview(bgView)
+        
+        // 获取保存到本地的网络类型
+        let userDefaults = UserDefaults.standard
+        let keyString = "CocoaDebugNetType"
+        let netType = userDefaults.integer(forKey: keyString)
+        
+        let currentNetworkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        currentNetworkLabel.textAlignment = .center
+        switch netType {
+        case 1:
+            currentNetworkLabel.text = "当前：开发环境"
+        case 2:
+            currentNetworkLabel.text = "当前：测试环境"
+        case 3:
+            currentNetworkLabel.text = "当前：线上环境"
+        default:
+            currentNetworkLabel.text = "当前：未选择环境"
+            break
+        }
+        
+        currentNetworkLabel.textColor = UIColor.white
+        bgView.addSubview(currentNetworkLabel)
+        
+        let color: String = "#7B94CD"
+        let cutNetworkDeveloperButton = UIButton(type: .custom)
+        cutNetworkDeveloperButton.frame = CGRect(x: 0, y: 60, width: self.view.frame.size.width, height: 50)
+        cutNetworkDeveloperButton.setTitle("开发环境", for: UIControl.State.normal)
+        cutNetworkDeveloperButton.addTarget(self, action: #selector(developerButtonAction), for: UIControl.Event.touchUpInside)
+        cutNetworkDeveloperButton.backgroundColor = color.hexColor
+        bgView.addSubview(cutNetworkDeveloperButton)
 
-        // Do any additional setup after loading the view.
+        let cutNetworkTextButton = UIButton(type: .custom)
+        cutNetworkTextButton.frame = CGRect(x: 0, y: 120, width: self.view.frame.size.width, height: 50)
+        cutNetworkTextButton.setTitle("测试环境", for: UIControl.State.normal)
+        cutNetworkTextButton.backgroundColor = color.hexColor
+        cutNetworkTextButton.addTarget(self, action: #selector(developerButtonAction), for: UIControl.Event.touchUpInside)
+        bgView.addSubview(cutNetworkTextButton)
+        
+        let cutNetworkButton = UIButton(type: .custom)
+        cutNetworkButton.frame = CGRect(x: 0, y: 180, width: self.view.frame.size.width, height: 50)
+        cutNetworkButton.setTitle("正式环境", for: UIControl.State.normal)
+        cutNetworkButton.backgroundColor = color.hexColor
+        cutNetworkButton.addTarget(self, action: #selector(cutNetworkButtonAction), for: UIControl.Event.touchUpInside)
+        bgView.addSubview(cutNetworkButton)
+        
+        let clearDataButton = UIButton(type: .custom)
+        clearDataButton.frame = CGRect(x: 0, y: 240, width: self.view.frame.size.width, height: 50)
+        clearDataButton.setTitle("清除所有数据（相当于卸载重装）", for: UIControl.State.normal)
+        clearDataButton.backgroundColor = color.hexColor
+        clearDataButton.addTarget(self, action: #selector(clearDataButtonAction), for: UIControl.Event.touchUpInside)
+        bgView.addSubview(clearDataButton)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        bgView.center = CGPoint(x: self.view.bounds.width * 0.5, y: self.view.bounds.height * 0.5)
     }
-    */
+    
+    @objc func developerButtonAction() {
+        self.switchingNetwork(1)
+    }
+    
+    @objc func cutNetworkTextButtonAction() {
+        self.switchingNetwork(2)
+    }
+    
+    @objc func cutNetworkButtonAction() {
+        self.switchingNetwork(3)
+    }
+    
+    @objc func clearDataButtonAction() {
+        self.switchingNetwork(0)
+    }
 
+    func switchingNetwork(_ type: Int) {
+        let appDomain = Bundle.main.bundleIdentifier
+        UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+
+        if type == 0 {
+//            CustomHUD.show("清除数据...")
+            let fileManager = FileManager.default
+            let myDirectory = NSHomeDirectory() + "/Documents/"
+            try? fileManager.removeItem(atPath: myDirectory)
+            try? fileManager.createDirectory(atPath: myDirectory, withIntermediateDirectories: true,
+                                             attributes: nil)
+            let library = NSHomeDirectory() + "/Library/"
+            try? fileManager.removeItem(atPath: library)
+            try? fileManager.createDirectory(atPath: myDirectory, withIntermediateDirectories: true,
+                                             attributes: nil)
+            let systemData = NSHomeDirectory() + "/SystemData/"
+            try? fileManager.removeItem(atPath: systemData)
+            try? fileManager.createDirectory(atPath: myDirectory, withIntermediateDirectories: true,
+                                             attributes: nil)
+            let tmp = NSHomeDirectory() + "/tmp/"
+            try? fileManager.removeItem(atPath: tmp)
+            try? fileManager.createDirectory(atPath: myDirectory, withIntermediateDirectories: true,
+                                             attributes: nil)
+        } else {
+            let userDefaults = UserDefaults.standard
+            let keyString = "CocoaDebugNetType"
+            userDefaults.set(type, forKey: keyString)
+        }
+        exit(0)
+    }
+
+    static func didFinishLaunching(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
+                                   window: UIWindow!,
+                                   completionHandler: @escaping SelectFinishNetworkCallBack) {
+        // 获取保存到本地的网络类型
+        let userDefaults = UserDefaults.standard
+        let keyString = "CocoaDebugNetType"
+        let netType = userDefaults.integer(forKey: keyString)
+        if netType == 0 {
+            let viewController = UIViewController()
+            viewController.view.backgroundColor = UIColor.black
+            let nav = UINavigationController(rootViewController: viewController)
+            window.rootViewController = nav
+
+            let actionSheet = UIAlertController(title: "第一次启动", message: "请选择默认环境", preferredStyle: .alert)
+
+            let dev = UIAlertAction(title: "开发", style: .default, handler: { _ in
+                userDefaults.set(1, forKey: keyString)
+                completionHandler()
+            })
+
+            let test = UIAlertAction(title: "测试", style: .default, handler: { _ in
+                userDefaults.set(2, forKey: keyString)
+                completionHandler()
+            })
+
+            let release = UIAlertAction(title: "正式", style: .default, handler: { _ in
+                userDefaults.set(3, forKey: keyString)
+                completionHandler()
+            })
+
+            actionSheet.addAction(dev)
+            actionSheet.addAction(test)
+            actionSheet.addAction(release)
+            viewController.present(actionSheet, animated: true, completion: nil)
+        } else {
+            completionHandler()
+        }
+    }
 }
