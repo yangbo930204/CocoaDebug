@@ -20,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         #if DEBUG
-//            customCocoaDebug()
+//        CocoaDebug.selectNetwork(launchOptions, window: application.keyWindow) { [weak self] in
+//            self?.customCocoaDebug()
+//        }
+        customCocoaDebug()
         #endif
         
         return true
@@ -36,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CocoaDebug.emailToRecipients = ["aaa@gmail.com", "bbb@gmail.com"]
         CocoaDebug.emailCcRecipients = ["ccc@gmail.com", "ddd@gmail.com"]
         CocoaDebug.mainColor = "#fd9727"
-        CocoaDebug.additionalViewController = TestController.init()
-        
+        CocoaDebug.customMore()
+
         //Deprecated! If want to support protobuf, check branch: origin/protobuf_support
         //--- If use Google's Protocol buffers ---
 //        CocoaDebug.protobufTransferMap = [
