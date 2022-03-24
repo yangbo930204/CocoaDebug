@@ -10,7 +10,9 @@ import UIKit
 public typealias SelectFinishNetworkCallBack = () -> Void
 
 class MoreViewController: UIViewController {
-    
+    /// 首次选择完成环境的回调
+    var firstSelectNetworkDoneCallBack: (() -> Void)?
+
     var bgView: UIView!
     
     override func viewDidLoad() {
@@ -35,7 +37,7 @@ class MoreViewController: UIViewController {
         case 3:
             currentNetworkLabel.text = "当前：线上环境"
         default:
-            currentNetworkLabel.text = "当前：未选择环境"
+            currentNetworkLabel.text = "第一次启动：请选择默认环境"
             break
         }
         
@@ -64,12 +66,14 @@ class MoreViewController: UIViewController {
         cutNetworkButton.addTarget(self, action: #selector(cutNetworkButtonAction), for: UIControl.Event.touchUpInside)
         bgView.addSubview(cutNetworkButton)
         
-        let clearDataButton = UIButton(type: .custom)
-        clearDataButton.frame = CGRect(x: 0, y: 240, width: self.view.frame.size.width, height: 50)
-        clearDataButton.setTitle("清除所有数据（相当于卸载重装）", for: UIControl.State.normal)
-        clearDataButton.backgroundColor = color.hexColor
-        clearDataButton.addTarget(self, action: #selector(clearDataButtonAction), for: UIControl.Event.touchUpInside)
-        bgView.addSubview(clearDataButton)
+        if netType != 0 {
+            let clearDataButton = UIButton(type: .custom)
+            clearDataButton.frame = CGRect(x: 0, y: 240, width: self.view.frame.size.width, height: 50)
+            clearDataButton.setTitle("清除所有数据（相当于卸载重装）", for: UIControl.State.normal)
+            clearDataButton.backgroundColor = color.hexColor
+            clearDataButton.addTarget(self, action: #selector(clearDataButtonAction), for: UIControl.Event.touchUpInside)
+            bgView.addSubview(clearDataButton)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -121,8 +125,13 @@ class MoreViewController: UIViewController {
             let userDefaults = UserDefaults.standard
             let keyString = "CocoaDebugNetType"
             userDefaults.set(type, forKey: keyString)
+            userDefaults.synchronize()
         }
-        exit(0)
+        if firstSelectNetworkDoneCallBack != nil {
+            firstSelectNetworkDoneCallBack!()
+        } else {
+            exit(0)
+        }
     }
 
     static func didFinishLaunching(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
@@ -133,32 +142,12 @@ class MoreViewController: UIViewController {
         let keyString = "CocoaDebugNetType"
         let netType = userDefaults.integer(forKey: keyString)
         if netType == 0 {
-            let viewController = UIViewController()
+            let viewController = MoreViewController()
             viewController.view.backgroundColor = UIColor.black
-            let nav = UINavigationController(rootViewController: viewController)
-            window.rootViewController = nav
-
-            let actionSheet = UIAlertController(title: "第一次启动", message: "请选择默认环境", preferredStyle: .alert)
-
-            let dev = UIAlertAction(title: "开发", style: .default, handler: { _ in
-                userDefaults.set(1, forKey: keyString)
+            viewController.firstSelectNetworkDoneCallBack = {
                 completionHandler()
-            })
-
-            let test = UIAlertAction(title: "测试", style: .default, handler: { _ in
-                userDefaults.set(2, forKey: keyString)
-                completionHandler()
-            })
-
-            let release = UIAlertAction(title: "正式", style: .default, handler: { _ in
-                userDefaults.set(3, forKey: keyString)
-                completionHandler()
-            })
-
-            actionSheet.addAction(dev)
-            actionSheet.addAction(test)
-            actionSheet.addAction(release)
-            viewController.present(actionSheet, animated: true, completion: nil)
+            }
+            window.rootViewController = viewController
         } else {
             completionHandler()
         }
