@@ -35,7 +35,7 @@ class MoreViewController: UIViewController {
         case 2:
             currentNetworkLabel.text = "当前：测试环境"
         case 3:
-            currentNetworkLabel.text = "当前：线上环境"
+            currentNetworkLabel.text = "当前：正式环境"
         default:
             currentNetworkLabel.text = "第一次启动：请选择默认环境"
             break
@@ -56,7 +56,7 @@ class MoreViewController: UIViewController {
         cutNetworkTextButton.frame = CGRect(x: 0, y: 120, width: self.view.frame.size.width, height: 50)
         cutNetworkTextButton.setTitle("测试环境", for: UIControl.State.normal)
         cutNetworkTextButton.backgroundColor = color.hexColor
-        cutNetworkTextButton.addTarget(self, action: #selector(developerButtonAction), for: UIControl.Event.touchUpInside)
+        cutNetworkTextButton.addTarget(self, action: #selector(cutNetworkTextButtonAction), for: UIControl.Event.touchUpInside)
         bgView.addSubview(cutNetworkTextButton)
         
         let cutNetworkButton = UIButton(type: .custom)
