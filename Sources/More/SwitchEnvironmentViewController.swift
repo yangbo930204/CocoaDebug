@@ -26,7 +26,7 @@ class SwitchEnvironmentViewController: UIViewController {
 
         // 获取保存到本地的网络类型
         let color: UIColor = UIColor.black
-        let backgroundColor: UIColor = "#FFFC14".hexColor
+        let backgroundColor: UIColor = CocoaDebug.mainColor.hexColor
 
         currentNetworkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         currentNetworkLabel.textAlignment = .center
