@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 target 'Example_Swift' do
     use_frameworks!
     pod 'CocoaDebug', :path=> '../../CocoaDebug'

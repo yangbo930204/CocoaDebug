@@ -7,7 +7,7 @@
 
 import UIKit
 
-public typealias SelectFinishNetworkCallBack = () -> Void
+public typealias SelectFinishNetworkCallBack = (_ type: Int) -> Void
 
 class MoreViewController: UIViewController {
     /// 首次选择完成环境的回调
@@ -145,11 +145,11 @@ class MoreViewController: UIViewController {
             let viewController = MoreViewController()
             viewController.view.backgroundColor = UIColor.black
             viewController.firstSelectNetworkDoneCallBack = {
-                completionHandler()
+                completionHandler(1)
             }
             window.rootViewController = viewController
         } else {
-            completionHandler()
+            completionHandler(1)
         }
     }
 }
