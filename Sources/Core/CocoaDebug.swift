@@ -30,6 +30,8 @@ import UIKit
     @objc public static var mainColor: String = "#42d459"
     /// protobuf url and response class transfer map. Default value is `nil`.
     @objc public static var protobufTransferMap: [String: [String]]?
+    @objc public static var bubbleColor: String = "#000000"
+    @objc public static var bubbleTextColor: String = "#111111"
     /// 加密的内容,需要解密回调
     @objc public static var decryptBlock: ((_ data: [String: Any]) -> [String: Any])?
 

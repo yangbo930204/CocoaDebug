@@ -119,13 +119,13 @@ class Bubble: UIView {
     
     
     fileprivate func initLayer() {
-        self.backgroundColor = .black
+        self.backgroundColor = CocoaDebug.bubbleColor.hexColor
         self.layer.cornerRadius = _width/2
         self.sizeToFit()
         
         if let numberLabel = numberLabel {
             numberLabel.text = String(networkNumber)
-            numberLabel.textColor = .white
+            numberLabel.textColor = CocoaDebug.bubbleTextColor.hexColor
             numberLabel.textAlignment = .center
             numberLabel.adjustsFontSizeToFitWidth = true
             numberLabel.isHidden = true
