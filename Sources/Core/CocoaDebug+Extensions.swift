@@ -154,10 +154,8 @@ extension Data {
         //1.pretty json
         if var json = self.dataToDictionary() {
             // 如果有需要解密的内容，回调出去解密再传回来
-            if let encryptionContent = CocoaDebug.encryptionContent {
-                if let block = CocoaDebug.decryptBlock, let data = json[encryptionContent] {
-                    json[encryptionContent] = block(data as Any)
-                }
+            if let block = CocoaDebug.decryptBlock {
+                json = block(json)
             }
             
             if let str = json.dictionaryToString() {

@@ -30,10 +30,8 @@ import UIKit
     @objc public static var mainColor: String = "#42d459"
     /// protobuf url and response class transfer map. Default value is `nil`.
     @objc public static var protobufTransferMap: [String: [String]]?
-    /// 加密的内容字段
-    @objc public static var encryptionContent: String?
-    /// 解密回调
-    @objc public static var decryptBlock: ((_ data: Any) -> Any)?
+    /// 加密的内容,需要解密回调
+    @objc public static var decryptBlock: ((_ data: [String: Any]) -> [String: Any])?
 
     // MARK: - CocoaDebug enable
 
