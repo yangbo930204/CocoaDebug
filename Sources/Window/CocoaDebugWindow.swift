@@ -1,14 +1,14 @@
 //
-//  Example
-//  man
+//  CocoaDebug
+//  liman
 //
-//  Created by man 11/11/2018.
-//  Copyright © 2020 man. All rights reserved.
+//  Created by liman 02/02/2023.
+//  Copyright © 2023 liman. All rights reserved.
 //
 
 import UIKit
 
-protocol WindowDelegate: class {
+protocol WindowDelegate: AnyObject {
     func isPointEvent(point: CGPoint) -> Bool
 }
 

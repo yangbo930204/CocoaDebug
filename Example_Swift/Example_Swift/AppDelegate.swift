@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
-//  Example_Swift
+//  CocoaDebug
+//  liman
 //
-//  Created by man 8/11/20.
-//  Copyright © 2020 man. All rights reserved.
+//  Created by liman 02/02/2023.
+//  Copyright © 2023 liman. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        #if DEBUG
+    #if DEBUG
 //        CocoaDebug.selectNetwork(launchOptions, window: application.keyWindow) { [weak self] in
 //            self?.customCocoaDebug()
 //        }
@@ -54,18 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension AppDelegate {
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-    }
-}
-
-// MARK: - override Swift `print` method
+//MARK: - override Swift `print` method
 
 public func print<T>(file: String = #file, function: String = #function, line: Int = #line, _ message: T, color: UIColor = .white) {
     #if DEBUG

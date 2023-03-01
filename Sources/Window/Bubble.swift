@@ -1,15 +1,15 @@
 //
-//  Example
-//  man
+//  CocoaDebug
+//  liman
 //
-//  Created by man 11/11/2018.
-//  Copyright © 2020 man. All rights reserved.
+//  Created by liman 02/02/2023.
+//  Copyright © 2023 liman. All rights reserved.
 //
 
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-protocol BubbleDelegate: class {
+protocol BubbleDelegate: AnyObject {
     func didTapBubble()
 }
 

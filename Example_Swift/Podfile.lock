@@ -1,23 +1,16 @@
 PODS:
-  - CocoaDebug (1.7.2)
-  - Reveal-SDK (26)
+  - CocoaDebug (1.7.5)
 
 DEPENDENCIES:
   - CocoaDebug (from `../../CocoaDebug`)
-  - Reveal-SDK (= 26)
-
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Reveal-SDK
 
 EXTERNAL SOURCES:
   CocoaDebug:
     :path: "../../CocoaDebug"
 
 SPEC CHECKSUMS:
-  CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
-  Reveal-SDK: 5f94f14aff3d5f2a49f246edcd266fa4472679e9
+  CocoaDebug: fab63960955ae3ea6d50d599e9db1f17e364fe80
 
-PODFILE CHECKSUM: 4bd77a22e44c6168b4d95d6342588423ad9bfbaa
+PODFILE CHECKSUM: 798a083c75a55b21bc70b746bf99ec35c566185e
 
 COCOAPODS: 1.11.3

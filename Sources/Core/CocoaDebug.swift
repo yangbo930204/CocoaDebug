@@ -1,9 +1,9 @@
 //
-//  Example
-//  man
+//  CocoaDebug
+//  liman
 //
-//  Created by man 11/11/2018.
-//  Copyright © 2020 man. All rights reserved.
+//  Created by liman 02/02/2023.
+//  Copyright © 2023 liman. All rights reserved.
 //
 
 import Foundation
@@ -38,7 +38,7 @@ import UIKit
     // MARK: - CocoaDebug enable
 
     @objc public static func enable() {
-        initializationMethod(serverURL: serverURL, ignoredURLs: ignoredURLs, onlyURLs: onlyURLs, ignoredPrefixLogs: ignoredPrefixLogs, onlyPrefixLogs: onlyPrefixLogs, additionalViewController: additionalViewController, emailToRecipients: emailToRecipients, emailCcRecipients: emailCcRecipients, mainColor: mainColor, protobufTransferMap: protobufTransferMap)
+        initializationMethod(serverURL: nil, ignoredURLs: nil, onlyURLs: nil, ignoredPrefixLogs: nil, onlyPrefixLogs: nil, additionalViewController: additionalViewController, emailToRecipients: nil, emailCcRecipients: nil, mainColor: nil, protobufTransferMap: nil)
     }
 
     // MARK: - CocoaDebug disable
