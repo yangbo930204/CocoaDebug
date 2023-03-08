@@ -385,4 +385,22 @@ extension CocoaDebug {
     }
 }
 
-
+extension UIColor {
+    /// 将颜色转换为图片
+    ///
+    /// - Parameter color: 颜色
+    /// - Returns: 图片
+    func getImageWithColor(_ size: CGSize = .zero) -> UIImage {
+        var rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        if size.width > 0 {
+            rect.size = size
+        }
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(cgColor)
+        context!.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+}

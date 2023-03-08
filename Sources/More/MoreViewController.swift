@@ -17,7 +17,8 @@ class MoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor.black
+
         bgView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 290))
 //        bgView.backgroundColor = UIColor.red
         view.addSubview(bgView)

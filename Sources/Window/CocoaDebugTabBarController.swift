@@ -10,17 +10,28 @@ import UIKit
 
 class CocoaDebugTabBarController: UITabBarController {
     
+    private var colorView: UIView!
+    
     //MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black
 
         UIApplication.shared.keyWindow?.endEditing(true)
         
         setChildControllers()
         
-        self.selectedIndex = CocoaDebugSettings.shared.tabBarSelectItem 
+        self.selectedIndex = CocoaDebugSettings.shared.tabBarSelectItem
         self.tabBar.tintColor = Color.mainGreen
+        
+        colorView = UIView(frame: self.tabBar.bounds)
+        colorView.backgroundColor = UIColor.black
+        self.tabBar.insertSubview(colorView, at: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        colorView.frame = self.tabBar.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +76,7 @@ class CocoaDebugTabBarController: UITabBarController {
         //4.Add additional controller
         var temp = [network, logs, sandbox, app]
         
-        let nav = UINavigationController.init(rootViewController: additionalViewController)
+        let nav = CocoaDebugNavigationController.init(rootViewController: additionalViewController)
         nav.navigationBar.barTintColor = "#1f2124".hexColor
         nav.tabBarItem = UITabBarItem.init(tabBarSystemItem: .more, tag: 4)
 
