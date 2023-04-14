@@ -88,6 +88,21 @@ import UIKit
         }
         CocoaDebug.additionalViewController = vc
     }
+    
+    @objc public static func selectEnvironment(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
+                                           window: UIWindow!,
+                                           completionHandler: @escaping SelectFinishNetworkCallBack) {
+        SelectingNetworksViewController.didFinishLaunching(launchOptions, window: window, completionHandler: completionHandler)
+    }
+
+    @objc public static func addSelectingNetworks(_ type: Int, completionHandler: @escaping SelectFinishNetworkCallBack) {
+        let vc = SelectingNetworksViewController()
+        vc.type = type
+        vc.switchNetworkDoneCallBack = { type in
+            completionHandler(type)
+        }
+        CocoaDebug.additionalViewController = vc
+    }
 }
 
 // MARK: - override Swift `print` method
