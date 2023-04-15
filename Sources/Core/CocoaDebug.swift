@@ -38,7 +38,7 @@ import UIKit
     // MARK: - CocoaDebug enable
 
     @objc public static func enable() {
-        initializationMethod(serverURL: nil, ignoredURLs: nil, onlyURLs: nil, ignoredPrefixLogs: nil, onlyPrefixLogs: nil, additionalViewController: additionalViewController, emailToRecipients: nil, emailCcRecipients: nil, mainColor: nil, protobufTransferMap: nil)
+        initializationMethod(serverURL: serverURL, ignoredURLs: ignoredURLs, onlyURLs: onlyURLs, ignoredPrefixLogs: ignoredPrefixLogs, onlyPrefixLogs: onlyPrefixLogs, additionalViewController: additionalViewController, emailToRecipients: emailToRecipients, emailCcRecipients: emailCcRecipients, mainColor: mainColor, protobufTransferMap: protobufTransferMap)
     }
 
     // MARK: - CocoaDebug disable

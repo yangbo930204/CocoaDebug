@@ -11,7 +11,7 @@ import UIKit
 
 class SelectingNetworksViewController: UIViewController {
     /// 首次选择完成环境的回调
-    var firstSelectNetworkDoneCallBack: (() -> Void)?
+    var firstSelectNetworkDoneCallBack: ((_ type: Int) -> Void)?
     /// 选择环境的回调
     /// 1：生产，2：预生产，3：测试
     var switchNetworkDoneCallBack: ((_ type: Int) -> Void)?
@@ -158,7 +158,7 @@ class SelectingNetworksViewController: UIViewController {
             userDefaults.synchronize()
         }
         if firstSelectNetworkDoneCallBack != nil {
-            firstSelectNetworkDoneCallBack!()
+            firstSelectNetworkDoneCallBack!(type)
         } else if switchNetworkDoneCallBack != nil, type != 0 {
             switchNetworkDoneCallBack!(type)
         } else {
@@ -176,8 +176,8 @@ class SelectingNetworksViewController: UIViewController {
         if netType == 0 {
             let viewController = SelectingNetworksViewController()
             viewController.view.backgroundColor = UIColor.black
-            viewController.firstSelectNetworkDoneCallBack = {
-                completionHandler(1)
+            viewController.firstSelectNetworkDoneCallBack = { type in
+                completionHandler(type)
             }
             window.rootViewController = viewController
         } else {

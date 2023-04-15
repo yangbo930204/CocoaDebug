@@ -60,7 +60,7 @@
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     if (!dict) {return nil;}
     
-    NSData *prettyData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    NSData *prettyData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted | NSJSONWritingSortedKeys error:nil];
     if (!prettyData) {return nil;}
     
     NSString *prettyJsonString = [[NSString alloc] initWithData:prettyData encoding:NSUTF8StringEncoding];
