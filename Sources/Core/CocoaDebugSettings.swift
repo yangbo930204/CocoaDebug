@@ -1,9 +1,9 @@
 //
-//  CocoaDebug
-//  liman
+//  Example
+//  man
 //
-//  Created by liman 02/02/2023.
-//  Copyright © 2023 liman. All rights reserved.
+//  Created by man 11/11/2018.
+//  Copyright © 2020 man. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ import Foundation
     @objc public static let shared = CocoaDebugSettings()
     
     @objc public var slowAnimations: Bool = false {
-        didSet {
+        didSet {            
             if slowAnimations == false {
                 UIApplication.shared.windows.first?.layer.speed = 1;
             } else {
@@ -63,13 +63,6 @@ import Foundation
     @objc public var enableLogMonitoring: Bool = false {
         didSet {
             UserDefaults.standard.set(enableLogMonitoring, forKey: "enableLogMonitoring_CocoaDebug")
-            UserDefaults.standard.synchronize()
-        }
-    }
-
-    @objc public var disableLogMonitoring: Bool = false {
-        didSet {
-            UserDefaults.standard.set(disableLogMonitoring, forKey: "disableLogMonitoring_CocoaDebug")
             UserDefaults.standard.synchronize()
         }
     }
@@ -266,7 +259,7 @@ import Foundation
         
         
         //objc
-        
+
         ignoredURLs = _NetworkHelper.shared().ignoredURLs
         onlyURLs = _NetworkHelper.shared().onlyURLs
         
@@ -280,24 +273,5 @@ import Foundation
         enableMemoryLeaksMonitoring_ViewController = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_UIViewController_CocoaDebug")
         enableMemoryLeaksMonitoring_View = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_UIView_CocoaDebug")
         enableMemoryLeaksMonitoring_MemberVariables = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_MemberVariables_CocoaDebug")
-        
-        
-        //ios15
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            // self.navigationController?.navigationBar.isTranslucent = true  // pass "true" for fixing iOS 15.0 black bg issue
-            // self.navigationController?.navigationBar.tintColor = UIColor.white // We need to set tintcolor for iOS 15.0
-            appearance.shadowColor = .clear    //removing navigationbar 1 px bottom border.
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            
-            
-            let appearance2 = UITabBarAppearance()
-            appearance2.configureWithOpaqueBackground()
-            appearance2.shadowColor = .clear    //removing navigationbar 1 px bottom border.
-            UITabBar.appearance().standardAppearance = appearance2
-            UITabBar.appearance().scrollEdgeAppearance = appearance2
-        }
     }
 }

@@ -3,7 +3,7 @@
 //  Example_Swift
 //
 //  Created by man 5/8/19.
-//  Copyright © 2023 liman. All rights reserved.
+//  Copyright © 2020 man. All rights reserved.
 //
 
 #import "CocoaDebugTool.h"
@@ -60,7 +60,7 @@
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     if (!dict) {return nil;}
     
-    NSData *prettyData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted | NSJSONWritingSortedKeys error:nil];
+    NSData *prettyData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     if (!prettyData) {return nil;}
     
     NSString *prettyJsonString = [[NSString alloc] initWithData:prettyData encoding:NSUTF8StringEncoding];

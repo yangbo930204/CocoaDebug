@@ -1,9 +1,9 @@
 //
-//  CocoaDebug
-//  liman
+//  Example
+//  man
 //
-//  Created by liman 02/02/2023.
-//  Copyright © 2023 liman. All rights reserved.
+//  Created by man 11/11/2018.
+//  Copyright © 2020 man. All rights reserved.
 //
 
 import UIKit
@@ -26,22 +26,6 @@ class CocoaDebugNavigationController: UINavigationController {
                                        style: .done, target: self, action: selector)
         leftItem.tintColor = Color.mainGreen
         topViewController?.navigationItem.leftBarButtonItem = leftItem
-        let backgroundImage = UIColor.black.getImageWithColor(CGSize.zero)
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.titleTextAttributes = navigationBar.titleTextAttributes!
-            appearance.backgroundColor = UIColor.black
-            appearance.backgroundImage = backgroundImage
-            appearance.backgroundEffect = nil
-            appearance.shadowColor = UIColor.clear
-            appearance.shadowImage = UIImage()
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-        } else {
-            navigationBar.titleTextAttributes = navigationBar.titleTextAttributes!
-            navigationBar.shadowImage = UIImage()
-        }
-        navigationBar.setBackgroundImage(backgroundImage, for: .default)
     }
     
     

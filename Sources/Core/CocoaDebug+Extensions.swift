@@ -1,9 +1,9 @@
 //
-//  CocoaDebug
-//  liman
+//  Example
+//  man
 //
-//  Created by liman 02/02/2023.
-//  Copyright © 2023 liman. All rights reserved.
+//  Created by man 11/11/2018.
+//  Copyright © 2020 man. All rights reserved.
 //
 
 import Foundation
@@ -59,7 +59,7 @@ extension Data {
 extension Dictionary {
     func dictionaryToData() -> Data? {
         do {
-            return try JSONSerialization.data(withJSONObject: self, options: [.prettyPrinted, .sortedKeys])
+            return try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
         } catch {
         }
         return nil
@@ -356,8 +356,8 @@ extension CocoaDebug {
         CocoaDebugSettings.shared.slowAnimations = false
         
         //log
-        let disableLogMonitoring = UserDefaults.standard.bool(forKey: "disableLogMonitoring_CocoaDebug")
-        if disableLogMonitoring == true {
+        let enableLogMonitoring = UserDefaults.standard.bool(forKey: "enableLogMonitoring_CocoaDebug")
+        if enableLogMonitoring == false {
             _SwiftLogHelper.shared.enable = false
 //            _OCLogHelper.shared()?.enable = false
         } else {
@@ -385,22 +385,4 @@ extension CocoaDebug {
     }
 }
 
-extension UIColor {
-    /// 将颜色转换为图片
-    ///
-    /// - Parameter color: 颜色
-    /// - Returns: 图片
-    func getImageWithColor(_ size: CGSize = .zero) -> UIImage {
-        var rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        if size.width > 0 {
-            rect.size = size
-        }
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(cgColor)
-        context!.fill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-}
+

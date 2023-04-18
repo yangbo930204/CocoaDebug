@@ -1,9 +1,9 @@
 //
-//  CocoaDebug
-//  liman
+//  Example
+//  man
 //
-//  Created by liman 02/02/2023.
-//  Copyright © 2023 liman. All rights reserved.
+//  Created by man 11/11/2018.
+//  Copyright © 2020 man. All rights reserved.
 //
 
 import UIKit
@@ -63,7 +63,6 @@ extension CocoaDebugViewController: BubbleDelegate {
         WindowHelper.shared.displayedList = true
         let storyboard = UIStoryboard(name: "Manager", bundle: Bundle(for: CocoaDebug.self))
         guard let vc = storyboard.instantiateInitialViewController() else {return}
-        vc.view.backgroundColor = .white
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
