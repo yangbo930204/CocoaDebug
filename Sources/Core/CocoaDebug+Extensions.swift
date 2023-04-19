@@ -59,7 +59,7 @@ extension Data {
 extension Dictionary {
     func dictionaryToData() -> Data? {
         do {
-            return try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return try JSONSerialization.data(withJSONObject: self, options: [.prettyPrinted, .sortedKeys])
         } catch {
         }
         return nil
