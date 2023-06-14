@@ -32,6 +32,8 @@
 //
 @property (nonatomic, assign) BOOL isNetworkEnable;
 
+@property (nonatomic, assign) BOOL addRealAddress;
+
 //
 - (void)enable;
 - (void)disable;

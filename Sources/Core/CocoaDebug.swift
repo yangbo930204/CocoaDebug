@@ -34,6 +34,11 @@ import UIKit
     @objc public static var bubbleTextColor: String = "#111111"
     /// 加密的内容,需要解密回调
     @objc public static var decryptBlock: ((_ data: [String: Any]) -> [String: Any])?
+    @objc public static var addRealAddress: Bool = false {
+        didSet {
+            _NetworkHelper.shared().addRealAddress = addRealAddress
+        }
+    }
 
     // MARK: - CocoaDebug enable
 
@@ -88,10 +93,10 @@ import UIKit
         }
         CocoaDebug.additionalViewController = vc
     }
-    
+
     @objc public static func selectEnvironment(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
-                                           window: UIWindow!,
-                                           completionHandler: @escaping SelectFinishNetworkCallBack) {
+                                               window: UIWindow!,
+                                               completionHandler: @escaping SelectFinishNetworkCallBack) {
         SelectingNetworksViewController.didFinishLaunching(launchOptions, window: window, completionHandler: completionHandler)
     }
 

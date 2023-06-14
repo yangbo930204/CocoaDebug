@@ -37,7 +37,7 @@ class SwitchEnvironmentViewController: UIViewController {
 
         let cutNetworkDeveloperButton = UIButton(type: .custom)
         cutNetworkDeveloperButton.frame = CGRect(x: 14, y: 0, width: view.frame.size.width - 28, height: 44)
-        cutNetworkDeveloperButton.setTitle("Production Environment（生产环境）", for: UIControl.State.normal)
+        cutNetworkDeveloperButton.setTitle("Production Environment", for: UIControl.State.normal)
         cutNetworkDeveloperButton.addTarget(self, action: #selector(productionButtonAction), for: UIControl.Event.touchUpInside)
         cutNetworkDeveloperButton.setTitleColor(color, for: UIControl.State.normal)
         cutNetworkDeveloperButton.backgroundColor = backgroundColor
@@ -48,7 +48,7 @@ class SwitchEnvironmentViewController: UIViewController {
         let cutNetworkTextButton = UIButton(type: .custom)
         cutNetworkTextButton.frame = CGRect(x: cutNetworkDeveloperButton.frame.origin.x, y: 54,
                                             width: cutNetworkDeveloperButton.frame.size.width, height: 44)
-        cutNetworkTextButton.setTitle("Pre Production Environment（预生产环境）", for: UIControl.State.normal)
+        cutNetworkTextButton.setTitle("Pre Production Environment", for: UIControl.State.normal)
         cutNetworkTextButton.setTitleColor(color, for: UIControl.State.normal)
         cutNetworkTextButton.addTarget(self, action: #selector(grayscaleButtonAction), for: UIControl.Event.touchUpInside)
         cutNetworkTextButton.backgroundColor = backgroundColor
@@ -59,7 +59,7 @@ class SwitchEnvironmentViewController: UIViewController {
         let cutNetworkButton = UIButton(type: .custom)
         cutNetworkButton.frame = CGRect(x: cutNetworkDeveloperButton.frame.origin.x, y: 108,
                                         width: cutNetworkDeveloperButton.frame.size.width, height: 44)
-        cutNetworkButton.setTitle("Testing Environment（测试环境）", for: UIControl.State.normal)
+        cutNetworkButton.setTitle("Testing Environment", for: UIControl.State.normal)
         cutNetworkButton.setTitleColor(color, for: UIControl.State.normal)
         cutNetworkButton.addTarget(self, action: #selector(testButtonAction), for: UIControl.Event.touchUpInside)
         cutNetworkButton.backgroundColor = backgroundColor
