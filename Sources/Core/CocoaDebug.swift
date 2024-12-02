@@ -34,11 +34,6 @@ import UIKit
     @objc public static var bubbleTextColor: String = "#111111"
     /// 加密的内容,需要解密回调
     @objc public static var decryptBlock: ((_ data: [String: Any]) -> [String: Any])?
-    @objc public static var addRealAddress: Bool = false {
-        didSet {
-            _NetworkHelper.shared().addRealAddress = addRealAddress
-        }
-    }
 
     // MARK: - CocoaDebug enable
 
@@ -66,27 +61,15 @@ import UIKit
 
     // MARK: - 自定义的更多
 
-    @objc public static func selectNetwork(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
-                                           window: UIWindow!,
-                                           completionHandler: @escaping SelectFinishNetworkCallBack) {
-        MoreViewController.didFinishLaunching(launchOptions, window: window, completionHandler: completionHandler)
-    }
-
-    // MARK: - 自定义的更多
-
-    @objc public static func customMore(completionHandler: @escaping SelectFinishNetworkCallBack) {
-        CocoaDebug.additionalViewController = MoreViewController()
-    }
-
     @objc public static func addEnvironmentSwitch(_ type: Int, completionHandler: @escaping SelectFinishNetworkCallBack) {
         let vc = SwitchEnvironmentViewController()
         switch type {
         case 1:
-            vc.currentNetworkString = "Current: Production Environment"
+            vc.currentNetwork = .production
         case 2:
-            vc.currentNetworkString = "Current: Pre Production Environment"
+            vc.currentNetwork = .preProduction
         default:
-            vc.currentNetworkString = "Current: Testing Environment"
+            vc.currentNetwork = .testing
         }
         vc.switchNetworkDoneCallBack = { type in
             completionHandler(type)
@@ -94,19 +77,21 @@ import UIKit
         CocoaDebug.additionalViewController = vc
     }
 
-    @objc public static func selectEnvironment(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
-                                               window: UIWindow!,
+    @objc public static func addMoreHeaderView(_ view: UIView) {
+        if let vc = CocoaDebug.additionalViewController as? SwitchEnvironmentViewController {
+            vc.tableHeaderView = view
+        }
+    }
+
+    @objc public static func addMoreTool(_ eventModel: CocoaEventModel) {
+        if let vc = CocoaDebug.additionalViewController as? SwitchEnvironmentViewController {
+            vc.addEventModel(eventModel)
+        }
+    }
+
+    @objc public static func selectEnvironment(window: UIWindow!,
                                                completionHandler: @escaping SelectFinishNetworkCallBack) {
-        SelectingNetworksViewController.didFinishLaunching(launchOptions, window: window, completionHandler: completionHandler)
-    }
-
-    @objc public static func addSelectingNetworks(_ type: Int, completionHandler: @escaping SelectFinishNetworkCallBack) {
-        let vc = SelectingNetworksViewController()
-        vc.type = type
-        vc.switchNetworkDoneCallBack = { type in
-            completionHandler(type)
-        }
-        CocoaDebug.additionalViewController = vc
+        SelectingNetworksViewController.didFinishLaunching(window: window, completionHandler: completionHandler)
     }
 }
 

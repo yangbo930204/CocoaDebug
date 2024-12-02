@@ -15,9 +15,9 @@ import Foundation
     @objc public var slowAnimations: Bool = false {
         didSet {            
             if slowAnimations == false {
-                UIApplication.shared.windows.first?.layer.speed = 1;
+                UIApplication.shared.windows.first?.layer.speed = 1
             } else {
-                UIApplication.shared.windows.first?.layer.speed = 0.1;
+                UIApplication.shared.windows.first?.layer.speed = 0.1
             }
         }
     }
@@ -29,7 +29,7 @@ import Foundation
         }
     }
     
-    @objc public var firstIn: String? = nil {
+    @objc public var firstIn: String? {
         didSet {
             UserDefaults.standard.set(firstIn, forKey: "firstIn_CocoaDebug")
             UserDefaults.standard.synchronize()
@@ -110,17 +110,14 @@ import Foundation
             let x = WindowHelper.shared.vc.bubble.frame.origin.x
             let width = WindowHelper.shared.vc.bubble.frame.size.width
             
-            if showBubbleAndWindow == true
-            {
+            if showBubbleAndWindow == true {
                 if x > UIScreen.main.bounds.size.width/2 {
                     WindowHelper.shared.vc.bubble.frame.origin.x = UIScreen.main.bounds.size.width - width/8*8.25
                 } else {
                     WindowHelper.shared.vc.bubble.frame.origin.x = -width + width/8*8.25
                 }
                 WindowHelper.shared.enable()
-            }
-            else
-            {
+            } else {
                 if x > UIScreen.main.bounds.size.width/2 {
                     WindowHelper.shared.vc.bubble.frame.origin.x = UIScreen.main.bounds.size.width
                 } else {
@@ -130,7 +127,7 @@ import Foundation
             }
         }
     }
-    @objc public var serverURL: String? = nil {
+    @objc public var serverURL: String? {
         didSet {
             UserDefaults.standard.set(serverURL, forKey: "serverURL_CocoaDebug")
             UserDefaults.standard.synchronize()
@@ -166,25 +163,25 @@ import Foundation
             UserDefaults.standard.synchronize()
         }
     }
-    @objc public var logSearchWordNormal: String? = nil {
+    @objc public var logSearchWordNormal: String? {
         didSet {
             UserDefaults.standard.set(logSearchWordNormal, forKey: "logSearchWordNormal_CocoaDebug")
             UserDefaults.standard.synchronize()
         }
     }
-    @objc public var logSearchWordRN: String? = nil {
+    @objc public var logSearchWordRN: String? {
         didSet {
             UserDefaults.standard.set(logSearchWordRN, forKey: "logSearchWordRN_CocoaDebug")
             UserDefaults.standard.synchronize()
         }
     }
-    @objc public var logSearchWordWeb: String? = nil {
+    @objc public var logSearchWordWeb: String? {
         didSet {
             UserDefaults.standard.set(logSearchWordWeb, forKey: "logSearchWordWeb_CocoaDebug")
             UserDefaults.standard.synchronize()
         }
     }
-    @objc public var networkSearchWord: String? = nil {
+    @objc public var networkSearchWord: String? {
         didSet {
             UserDefaults.standard.set(networkSearchWord, forKey: "networkSearchWord_CocoaDebug")
             UserDefaults.standard.synchronize()
@@ -197,38 +194,38 @@ import Foundation
             _NetworkHelper.shared().mainColor = mainColor.hexColor
         }
     }
-    @objc public var additionalViewController: UIViewController? = nil
+    @objc public var additionalViewController: UIViewController?
     
-    //share via email
-    @objc public var emailToRecipients: [String]? = nil
-    @objc public var emailCcRecipients: [String]? = nil
+    // share via email
+    @objc public var emailToRecipients: [String]?
+    @objc public var emailCcRecipients: [String]?
     
-    //objc
+    // objc
     
-    @objc public var ignoredURLs: [String]? = nil {
+    @objc public var ignoredURLs: [String]? {
         didSet {
             _NetworkHelper.shared().ignoredURLs = ignoredURLs
         }
     }
-    @objc public var onlyURLs: [String]? = nil {
+    @objc public var onlyURLs: [String]? {
         didSet {
             _NetworkHelper.shared().onlyURLs = onlyURLs
         }
     }
     
-    @objc public var ignoredPrefixLogs: [String]? = nil {
+    @objc public var ignoredPrefixLogs: [String]? {
         didSet {
             _NetworkHelper.shared().ignoredPrefixLogs = ignoredPrefixLogs
         }
     }
-    @objc public var onlyPrefixLogs: [String]? = nil {
+    @objc public var onlyPrefixLogs: [String]? {
         didSet {
             _NetworkHelper.shared().onlyPrefixLogs = onlyPrefixLogs
         }
     }
     
-    //protobuf
-    @objc public var protobufTransferMap: [String: [String]]? = nil {
+    // protobuf
+    @objc public var protobufTransferMap: [String: [String]]? {
         didSet {
             _NetworkHelper.shared().protobufTransferMap = protobufTransferMap
         }
@@ -257,8 +254,7 @@ import Foundation
         networkSearchWord = UserDefaults.standard.string(forKey: "networkSearchWord_CocoaDebug")
         mainColor = UserDefaults.standard.string(forKey: "mainColor_CocoaDebug") ?? "#42d459"
         
-        
-        //objc
+        // objc
 
         ignoredURLs = _NetworkHelper.shared().ignoredURLs
         onlyURLs = _NetworkHelper.shared().onlyURLs
@@ -266,10 +262,10 @@ import Foundation
         ignoredPrefixLogs = _NetworkHelper.shared().ignoredPrefixLogs
         onlyPrefixLogs = _NetworkHelper.shared().onlyPrefixLogs
         
-        //protobuf
+        // protobuf
         protobufTransferMap = _NetworkHelper.shared().protobufTransferMap
         
-        //Memory
+        // Memory
         enableMemoryLeaksMonitoring_ViewController = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_UIViewController_CocoaDebug")
         enableMemoryLeaksMonitoring_View = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_UIView_CocoaDebug")
         enableMemoryLeaksMonitoring_MemberVariables = UserDefaults.standard.bool(forKey: "enableMemoryLeaksMonitoring_MemberVariables_CocoaDebug")

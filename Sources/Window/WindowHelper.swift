@@ -13,12 +13,11 @@ public class WindowHelper: NSObject {
     
     var window: CocoaDebugWindow
     var displayedList = false
-    lazy var vc = CocoaDebugViewController() //must lazy init, otherwise crash
+    lazy var vc = CocoaDebugViewController() // must lazy init, otherwise crash
     
-    //UIBlocking
+    // UIBlocking
 //    fileprivate var uiBlockingCounter = UIBlockingCounter()
 //    var uiBlockingCallback:((Int) -> Void)?
-    
     
     private override init() {
         window = CocoaDebugWindow(frame: UIScreen.main.bounds)
@@ -28,7 +27,6 @@ public class WindowHelper: NSObject {
         
 //        uiBlockingCounter.delegate = self
     }
-    
     
     public func enable() {
         if window.rootViewController == vc {
@@ -42,7 +40,6 @@ public class WindowHelper: NSObject {
         if CocoaDebugSettings.shared.enableUIBlockingMonitoring == true {
             startUIBlockingMonitoring()
         }
-
         
         if #available(iOS 13.0, *) {
             var success: Bool = false
@@ -61,7 +58,6 @@ public class WindowHelper: NSObject {
             }
         }
     }
-    
     
     public func disable() {
         if window.rootViewController == nil {
@@ -84,13 +80,11 @@ public class WindowHelper: NSObject {
     }
 }
 
-
 // MARK: - UIBlockingCounterDelegate
-//extension WindowHelper: UIBlockingCounterDelegate {
+// extension WindowHelper: UIBlockingCounterDelegate {
 //    @objc public func uiBlockingCounter(_ counter: UIBlockingCounter, didUpdateFramesPerSecond uiBlocking: Int) {
 //        if let uiBlockingCallback = uiBlockingCallback {
 //            uiBlockingCallback(uiBlocking)
 //        }
 //    }
-//}
-
+// }

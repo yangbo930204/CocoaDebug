@@ -16,7 +16,6 @@ class _CrashModel: NSObject, NSCoding {
     var name: String?
     var callStacks: [String]?
     
-    
     init(name: String, reason: String?) {
         id = UUID().uuidString
         date = Date()
@@ -54,4 +53,3 @@ class _CrashModel: NSObject, NSCoding {
         return stringContent as String
     }
 }
-

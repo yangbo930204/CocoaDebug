@@ -17,7 +17,7 @@ class CrashStoreManager {
         crashArray = self.getCrashs()
     }
     
-    //MARK: - public
+    // MARK: - public
     func addCrash(_ crash: _CrashModel) {
         if self.crashArray.count >= 1000 {
             if self.crashArray.count > 0 {
@@ -46,7 +46,7 @@ class CrashStoreManager {
         }
     }
     
-    //MARK: - private
+    // MARK: - private
     private func archiveCrashs(_ crashs: [_CrashModel]) {
         do {
             var dataArchive: Data

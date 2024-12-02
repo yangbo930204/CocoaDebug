@@ -10,6 +10,7 @@
 #import "CocoaDebugTool.h"
 #import "CocoaDebugDeviceInfo.h"
 #import "NSObject+CocoaDebug.h"
+#import "CocoaEventModel.h"
 
 #import "_fishhook.h"
 #import "_FileInfo.h"

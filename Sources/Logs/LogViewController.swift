@@ -27,36 +27,32 @@ class LogViewController: UIViewController {
     var rnReloadDataFinish: Bool = true
     var webReloadDataFinish: Bool = true
     
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var deleteItem: UIBarButtonItem!
     
     @IBOutlet weak var defaultTableView: UITableView!
     @IBOutlet weak var defaultSearchBar: UISearchBar!
     var defaultModels: [_OCLogModel] = [_OCLogModel]()
-    var defaultCacheModels: Array<_OCLogModel>?
-    var defaultSearchModels: Array<_OCLogModel>?
+    var defaultCacheModels: [_OCLogModel]?
+    var defaultSearchModels: [_OCLogModel]?
     
     @IBOutlet weak var rnTableView: UITableView!
     @IBOutlet weak var rnSearchBar: UISearchBar!
     var rnModels: [_OCLogModel] = [_OCLogModel]()
-    var rnCacheModels: Array<_OCLogModel>?
-    var rnSearchModels: Array<_OCLogModel>?
+    var rnCacheModels: [_OCLogModel]?
+    var rnSearchModels: [_OCLogModel]?
     
     @IBOutlet weak var webTableView: UITableView!
     @IBOutlet weak var webSearchBar: UISearchBar!
     var webModels: [_OCLogModel] = [_OCLogModel]()
-    var webCacheModels: Array<_OCLogModel>?
-    var webSearchModels: Array<_OCLogModel>?
+    var webCacheModels: [_OCLogModel]?
+    var webSearchModels: [_OCLogModel]?
     
-    
-    
-    //MARK: - tool
-    //搜索逻辑
+    // MARK: - tool
+    // 搜索逻辑
     func searchLogic(_ searchText: String = "") {
         
-        if selectedSegmentIndex == 0
-        {
+        if selectedSegmentIndex == 0 {
             guard let defaultCacheModels = defaultCacheModels else {return}
             defaultSearchModels = defaultCacheModels
             
@@ -67,16 +63,14 @@ class LogViewController: UIViewController {
                 
                 for _ in defaultSearchModels {
                     if let index = self.defaultSearchModels?.firstIndex(where: { (model) -> Bool in
-                        return !model.content.lowercased().contains(searchText.lowercased())//忽略大小写
+                        return !model.content.lowercased().contains(searchText.lowercased())// 忽略大小写
                     }) {
                         self.defaultSearchModels?.remove(at: index)
                     }
                 }
                 defaultModels = self.defaultSearchModels ?? []
             }
-        }
-        else if selectedSegmentIndex == 1
-        {
+        } else if selectedSegmentIndex == 1 {
             guard let rnCacheModels = rnCacheModels else {return}
             rnSearchModels = rnCacheModels
             
@@ -87,16 +81,14 @@ class LogViewController: UIViewController {
                 
                 for _ in rnSearchModels {
                     if let index = self.rnSearchModels?.firstIndex(where: { (model) -> Bool in
-                        return !model.content.lowercased().contains(searchText.lowercased())//忽略大小写
+                        return !model.content.lowercased().contains(searchText.lowercased())// 忽略大小写
                     }) {
                         self.rnSearchModels?.remove(at: index)
                     }
                 }
                 rnModels = self.rnSearchModels ?? []
             }
-        }
-        else
-        {
+        } else {
             guard let webCacheModels = webCacheModels else {return}
             webSearchModels = webCacheModels
             
@@ -107,7 +99,7 @@ class LogViewController: UIViewController {
                 
                 for _ in webSearchModels {
                     if let index = self.webSearchModels?.firstIndex(where: { (model) -> Bool in
-                        return !model.content.lowercased().contains(searchText.lowercased())//忽略大小写
+                        return !model.content.lowercased().contains(searchText.lowercased())// 忽略大小写
                     }) {
                         self.webSearchModels?.remove(at: index)
                     }
@@ -117,11 +109,10 @@ class LogViewController: UIViewController {
         }
     }
     
-    //MARK: - private
+    // MARK: - private
     func reloadLogs(needScrollToEnd: Bool = false, needReloadData: Bool = true) {
         
-        if selectedSegmentIndex == 0
-        {
+        if selectedSegmentIndex == 0 {
             if defaultReloadDataFinish == false {return}
             
             if defaultSearchBar.isHidden != false ||
@@ -158,7 +149,7 @@ class LogViewController: UIViewController {
             
             if needScrollToEnd == false {return}
             
-            //table下滑到底部
+            // table下滑到底部
             //                guard let count = self.defaultModels.count else {return}
             if self.defaultModels.count > 0 {
                 //                    guard let firstInDefault = self.firstInDefault else {return}
@@ -166,9 +157,7 @@ class LogViewController: UIViewController {
                 self.firstInDefault = false
             }
             //            }
-        }
-        else if selectedSegmentIndex == 1
-        {
+        } else if selectedSegmentIndex == 1 {
             if rnReloadDataFinish == false {return}
             
             if defaultSearchBar.isHidden != true ||
@@ -205,7 +194,7 @@ class LogViewController: UIViewController {
             
             if needScrollToEnd == false {return}
             
-            //table下滑到底部
+            // table下滑到底部
             //                guard let count = self.rnModels.count else {return}
             if self.rnModels.count > 0 {
                 //                    guard let firstInRN = self.firstInRN else {return}
@@ -213,9 +202,7 @@ class LogViewController: UIViewController {
                 self.firstInRN = false
             }
             //            }
-        }
-        else
-        {
+        } else {
             if webReloadDataFinish == false {return}
             
             if defaultSearchBar.isHidden != true ||
@@ -252,7 +239,7 @@ class LogViewController: UIViewController {
             
             if needScrollToEnd == false {return}
             
-            //table下滑到底部
+            // table下滑到底部
             //                guard let count = self.webModels.count else {return}
             if self.webModels.count > 0 {
                 //                    guard let firstInWeb = self.firstInWeb else {return}
@@ -263,15 +250,13 @@ class LogViewController: UIViewController {
         }
     }
     
-    
-    //MARK: - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(didTapView))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
         
         deleteItem.tintColor = Color.mainGreen
         segmentedControl.tintColor = Color.mainGreen
@@ -282,11 +267,10 @@ class LogViewController: UIViewController {
             segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
         }
         
-        //notification
+        // notification
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "refreshLogs_CocoaDebug"), object: nil, queue: OperationQueue.main) { [weak self] _ in
             self?.refreshLogs_notification()
         }
-        
         
         defaultTableView.tableFooterView = UIView()
         defaultTableView.delegate = self
@@ -295,12 +279,10 @@ class LogViewController: UIViewController {
         defaultSearchBar.delegate = self
         defaultSearchBar.text = CocoaDebugSettings.shared.logSearchWordNormal
         defaultSearchBar.isHidden = true
-        //抖动bug
+        // 抖动bug
         defaultTableView.estimatedRowHeight = 0
         defaultTableView.estimatedSectionHeaderHeight = 0
         defaultTableView.estimatedSectionFooterHeight = 0
-        
-        
         
         rnTableView.tableFooterView = UIView()
         rnTableView.delegate = self
@@ -309,12 +291,10 @@ class LogViewController: UIViewController {
         rnSearchBar.delegate = self
         rnSearchBar.text = CocoaDebugSettings.shared.logSearchWordRN
         rnSearchBar.isHidden = true
-        //抖动bug
+        // 抖动bug
         rnTableView.estimatedRowHeight = 0
         rnTableView.estimatedSectionHeaderHeight = 0
         rnTableView.estimatedSectionFooterHeight = 0
-        
-        
         
         webTableView.tableFooterView = UIView()
         webTableView.delegate = self
@@ -323,14 +303,12 @@ class LogViewController: UIViewController {
         webSearchBar.delegate = self
         webSearchBar.text = CocoaDebugSettings.shared.logSearchWordWeb
         webSearchBar.isHidden = true
-        //抖动bug
+        // 抖动bug
         webTableView.estimatedRowHeight = 0
         webTableView.estimatedSectionHeaderHeight = 0
         webTableView.estimatedSectionFooterHeight = 0
         
-        
-        
-        //segmentedControl
+        // segmentedControl
         selectedSegmentIndex = CocoaDebugSettings.shared.logSelectIndex 
         segmentedControl.selectedSegmentIndex = selectedSegmentIndex
         
@@ -344,9 +322,7 @@ class LogViewController: UIViewController {
         
         reloadLogs(needScrollToEnd: true, needReloadData: true)
         
-        
-        
-        //hide searchBar icon
+        // hide searchBar icon
         let textFieldInsideSearchBar = defaultSearchBar.value(forKey: "searchField") as! UITextField
         textFieldInsideSearchBar.leftViewMode = .never
         textFieldInsideSearchBar.leftView = nil
@@ -374,27 +350,21 @@ class LogViewController: UIViewController {
     }
     
     deinit {
-        //notification
+        // notification
         NotificationCenter.default.removeObserver(self)
     }
     
-    
-    //MARK: - target action
+    // MARK: - target action
     @IBAction func didTapDown(_ sender: Any) {
-        if selectedSegmentIndex == 0
-        {
+        if selectedSegmentIndex == 0 {
             defaultTableView.tableViewScrollToBottom(animated: true)
             defaultSearchBar.resignFirstResponder()
             reachEndDefault = true
-        }
-        else if selectedSegmentIndex == 1
-        {
+        } else if selectedSegmentIndex == 1 {
             rnTableView.tableViewScrollToBottom(animated: true)
             rnSearchBar.resignFirstResponder()
             reachEndRN = true
-        }
-        else
-        {
+        } else {
             webTableView.tableViewScrollToBottom(animated: true)
             webSearchBar.resignFirstResponder()
             reachEndWeb = true
@@ -402,30 +372,23 @@ class LogViewController: UIViewController {
     }
     
     @IBAction func didTapUp(_ sender: Any) {
-        if selectedSegmentIndex == 0
-        {
+        if selectedSegmentIndex == 0 {
             defaultTableView.tableViewScrollToHeader(animated: true)
             defaultSearchBar.resignFirstResponder()
             reachEndDefault = false
-        }
-        else if selectedSegmentIndex == 1
-        {
+        } else if selectedSegmentIndex == 1 {
             rnTableView.tableViewScrollToHeader(animated: true)
             rnSearchBar.resignFirstResponder()
             reachEndRN = false
-        }
-        else
-        {
+        } else {
             webTableView.tableViewScrollToHeader(animated: true)
             webSearchBar.resignFirstResponder()
             reachEndWeb = false
         }
     }
     
-    
     @IBAction func resetLogs(_ sender: Any) {
-        if selectedSegmentIndex == 0
-        {
+        if selectedSegmentIndex == 0 {
             defaultModels = []
             defaultCacheModels = []
             //            defaultSearchBar.text = nil
@@ -437,9 +400,7 @@ class LogViewController: UIViewController {
             //            dispatch_main_async_safe { [weak self] in
             self.defaultTableView.reloadData()
             //            }
-        }
-        else if selectedSegmentIndex == 1
-        {
+        } else if selectedSegmentIndex == 1 {
             rnModels = []
             rnCacheModels = []
             //            rnSearchBar.text = nil
@@ -451,9 +412,7 @@ class LogViewController: UIViewController {
             //            dispatch_main_async_safe { [weak self] in
             self.rnTableView.reloadData()
             //            }
-        }
-        else
-        {
+        } else {
             webModels = []
             webCacheModels = []
             //            webSearchBar.text = nil
@@ -514,20 +473,19 @@ class LogViewController: UIViewController {
         }
     }
     
-    
-    //MARK: - notification
+    // MARK: - notification
     @objc func refreshLogs_notification() {
         if self.selectedSegmentIndex == 0 {
-            self.reloadLogs(needScrollToEnd: self.reachEndDefault , needReloadData: true)
+            self.reloadLogs(needScrollToEnd: self.reachEndDefault, needReloadData: true)
         } else if self.selectedSegmentIndex == 1 {
-            self.reloadLogs(needScrollToEnd: self.reachEndRN , needReloadData: true)
+            self.reloadLogs(needScrollToEnd: self.reachEndRN, needReloadData: true)
         } else {
-            self.reloadLogs(needScrollToEnd: self.reachEndWeb , needReloadData: true)
+            self.reloadLogs(needScrollToEnd: self.reachEndWeb, needReloadData: true)
         }
     }
 }
 
-//MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension LogViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -543,16 +501,11 @@ extension LogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LogCell", for: indexPath) as! LogCell
         
-        if tableView == defaultTableView
-        {
+        if tableView == defaultTableView {
             cell.model = defaultModels[indexPath.row]
-        }
-        else if tableView == rnTableView
-        {
+        } else if tableView == rnTableView {
             cell.model = rnModels[indexPath.row]
-        }
-        else
-        {
+        } else {
             cell.model = webModels[indexPath.row]
         }
         
@@ -560,7 +513,7 @@ extension LogViewController: UITableViewDataSource {
     }
 }
 
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension LogViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -569,22 +522,17 @@ extension LogViewController: UITableViewDelegate {
         var logTitleString = ""
         var models_: [_OCLogModel]?
         
-        if tableView == defaultTableView
-        {
+        if tableView == defaultTableView {
             defaultSearchBar.resignFirstResponder()
             reachEndDefault = false
             logTitleString = "Log"
             models_ = defaultModels
-        }
-        else if tableView == rnTableView
-        {
+        } else if tableView == rnTableView {
             rnSearchBar.resignFirstResponder()
             reachEndRN = false
             logTitleString = "RN"
             models_ = rnModels
-        }
-        else
-        {
+        } else {
             webSearchBar.resignFirstResponder()
             reachEndWeb = false
             logTitleString = "Web"
@@ -622,14 +570,14 @@ extension LogViewController: UITableViewDelegate {
         }
         
         if let height = model.str?.height(with: UIFont.boldSystemFont(ofSize: 12), constraintToWidth: UIScreen.main.bounds.size.width) {
-            return height + 10;
+            return height + 10
         }
         
         return 0
     }
 }
 
-//MARK: - UIScrollViewDelegate
+// MARK: - UIScrollViewDelegate
 extension LogViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -647,7 +595,7 @@ extension LogViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
-            //bottom reached
+            // bottom reached
             if scrollView == defaultTableView {
                 reachEndDefault = true
             } else if scrollView == rnTableView {
@@ -659,36 +607,29 @@ extension LogViewController: UIScrollViewDelegate {
     }
 }
 
-//MARK: - UISearchBarDelegate
+// MARK: - UISearchBarDelegate
 extension LogViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
-    {
-        if searchBar == defaultSearchBar
-        {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar == defaultSearchBar {
             CocoaDebugSettings.shared.logSearchWordNormal = searchText
             searchLogic(searchText)
             
             //            dispatch_main_async_safe { [weak self] in
             self.defaultTableView.reloadData()
             //            }
-        }
-        else if searchBar == rnSearchBar
-        {
+        } else if searchBar == rnSearchBar {
             CocoaDebugSettings.shared.logSearchWordRN = searchText
             searchLogic(searchText)
             
             //            dispatch_main_async_safe { [weak self] in
             self.rnTableView.reloadData()
             //            }
-        }
-        else
-        {
+        } else {
             CocoaDebugSettings.shared.logSearchWordWeb = searchText
             searchLogic(searchText)
             

@@ -13,7 +13,7 @@ class UIBlockingBubble: UIView {
     static var size: CGSize {return CGSize(width: 70, height: 20)}
     
     private var uiBlockingLabel: UILabel? = {
-        return UILabel(frame: CGRect(x:0, y:0, width:size.width, height:size.height))
+        return UILabel(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
     }()
     
     fileprivate func initLayer() {
@@ -26,9 +26,9 @@ class UIBlockingBubble: UIView {
         }
     }
     
-    //MARK: - init
+    // MARK: - init
     override init(frame: CGRect) {
-        super.init(frame: CGRect(x: UIScreen.main.bounds.width/4.0, y:1, width: frame.width, height: frame.height))
+        super.init(frame: CGRect(x: UIScreen.main.bounds.width/4.0, y: 1, width: frame.width, height: frame.height))
         
         initLayer()
         
@@ -57,7 +57,7 @@ class UIBlockingBubble: UIView {
     func updateFrame() {
         if #available(iOS 11.0, *) {
             let safeAreaInsetsTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-            if safeAreaInsetsTop > 24 { //iPhoneX
+            if safeAreaInsetsTop > 24 { // iPhoneX
                 center.x = UIScreen.main.bounds.width/2.0
                 center.y = 39
                 
@@ -80,7 +80,7 @@ class UIBlockingBubble: UIView {
     }
     
     deinit {
-        //notification
+        // notification
         NotificationCenter.default.removeObserver(self)
     }
 }

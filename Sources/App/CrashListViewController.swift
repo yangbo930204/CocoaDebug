@@ -16,7 +16,7 @@ class CrashListViewController: UITableViewController {
     
     var naviItemTitleLabel: UILabel?
     
-    //MARK: - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,8 +27,7 @@ class CrashListViewController: UITableViewController {
         naviItemTitleLabel?.text = "Crash"
         naviItem.titleView = naviItemTitleLabel
         
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action:#selector(CrashListViewController.deleteCrashes))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(CrashListViewController.deleteCrashes))
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -38,7 +37,7 @@ class CrashListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    //MARK: - target action
+    // MARK: - target action
     @objc func deleteCrashes() {
         models = []
         CrashStoreManager.shared.resetCrashs()
@@ -49,7 +48,7 @@ class CrashListViewController: UITableViewController {
     }
 }
 
-//MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension CrashListViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,7 +64,7 @@ extension CrashListViewController {
     }
 }
 
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension CrashListViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,7 +79,7 @@ extension CrashListViewController {
     @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, sourceView, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             guard let models = self?.models else {return}
             CrashStoreManager.shared.removeCrash(models[indexPath.row])
             self?.models.remove(at: indexPath.row)
@@ -93,7 +92,7 @@ extension CrashListViewController {
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    //MARK: - only for ios8/ios9/ios10, not ios11
+    // MARK: - only for ios8/ios9/ios10, not ios11
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -104,7 +103,7 @@ extension CrashListViewController {
         return true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
+        if editingStyle == .delete {
             CrashStoreManager.shared.removeCrash(models[indexPath.row])
             self.models.remove(at: indexPath.row)
             //            self.dispatch_main_async_safe { [weak self] in

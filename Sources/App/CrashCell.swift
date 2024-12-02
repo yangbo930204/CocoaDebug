@@ -28,9 +28,9 @@ class CrashCell: UITableViewCell {
                 let attstr = NSMutableAttributedString(string: content)
                 
                 attstr.addAttribute(.foregroundColor,
-                                    value: UIColor.white, range: NSMakeRange(0, content.count))
+                                    value: UIColor.white, range: NSRange(location: 0, length: content.count))
                 
-                let range = NSMakeRange(0, formatDate.count)
+                let range = NSRange(location: 0, length: formatDate.count)
                 attstr.addAttribute(.foregroundColor, value: Color.mainGreen, range: range)
                 attstr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 12), range: range)
                 

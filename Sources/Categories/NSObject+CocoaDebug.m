@@ -79,6 +79,9 @@
 
 + (UIColor *)colorFromHexString:(NSString *)hexString
 {
+    if(hexString || hexString.length == 0){
+        return UIColor.whiteColor;
+    }
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
     [scanner setScanLocation:1];

@@ -7,8 +7,6 @@
 
 import UIKit
 
-//public typealias SelectFinishNetworkCallBack = (_ type: Int) -> Void
-
 class SelectingNetworksViewController: UIViewController {
     /// 首次选择完成环境的回调
     var firstSelectNetworkDoneCallBack: ((_ type: Int) -> Void)?
@@ -19,7 +17,7 @@ class SelectingNetworksViewController: UIViewController {
 
     var type: Int = 0
     var bgView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
@@ -29,29 +27,26 @@ class SelectingNetworksViewController: UIViewController {
         view.addSubview(bgView)
 
         let netType = type
-        
-        currentNetworkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+
+        currentNetworkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
         currentNetworkLabel.textAlignment = .center
-        
-        let productionString = "Production Environment"
-        let preProductionString = "Pre Production Environment"
-        let testingString = "Testing Environment"
+
+        let productionString = SettingEventType.production.rawValue
+        let preProductionString = SettingEventType.preProduction.rawValue
+        let testingString = SettingEventType.testing.rawValue
         switch netType {
         case 1:
-            currentNetworkLabel.text = "Current:\(productionString)"
+            currentNetworkLabel.text = "当前:\(productionString)"
         case 2:
-            currentNetworkLabel.text = "Current:\(preProductionString)"
+            currentNetworkLabel.text = "当前:\(preProductionString)"
         case 3:
-            currentNetworkLabel.text = "Current:\(testingString)"
+            currentNetworkLabel.text = "当前:\(testingString)"
         default:
-            currentNetworkLabel.text = "Please choose an environment"
+            currentNetworkLabel.text = "请选择环境"
         }
-        
+
         currentNetworkLabel.textColor = UIColor.white
         bgView.addSubview(currentNetworkLabel)
-        
-        bgView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 152))
-        view.addSubview(bgView)
 
         let color: UIColor = UIColor.black
         let backgroundColor: UIColor = CocoaDebug.mainColor.hexColor
@@ -87,7 +82,7 @@ class SelectingNetworksViewController: UIViewController {
         cutNetworkButton.layer.masksToBounds = true
         cutNetworkButton.layer.cornerRadius = 4
         bgView.addSubview(cutNetworkButton)
-        
+
         if netType != 0 {
             let clearDataButton = UIButton(type: .custom)
             clearDataButton.frame = CGRect(x: cutNetworkDeveloperButton.frame.origin.x, y: 162,
@@ -99,11 +94,11 @@ class SelectingNetworksViewController: UIViewController {
             clearDataButton.layer.masksToBounds = true
             clearDataButton.layer.cornerRadius = 4
             bgView.addSubview(clearDataButton)
-            
+
             bgView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 208)
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bgView.center = CGPoint(x: view.bounds.width * 0.5, y: view.bounds.height * 0.5)
@@ -112,19 +107,19 @@ class SelectingNetworksViewController: UIViewController {
     }
 
     @objc func productionButtonAction() {
-        self.switchingNetwork(1)
+        switchingNetwork(1)
     }
-    
+
     @objc func grayscaleButtonAction() {
-        self.switchingNetwork(2)
+        switchingNetwork(2)
     }
-    
+
     @objc func testButtonAction() {
-        self.switchingNetwork(3)
+        switchingNetwork(3)
     }
-    
+
     @objc func clearDataButtonAction() {
-        self.switchingNetwork(0)
+        switchingNetwork(0)
     }
 
     func switchingNetwork(_ type: Int) {
@@ -165,8 +160,7 @@ class SelectingNetworksViewController: UIViewController {
         }
     }
 
-    static func didFinishLaunching(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?,
-                                   window: UIWindow!,
+    static func didFinishLaunching(window: UIWindow!,
                                    completionHandler: @escaping SelectFinishNetworkCallBack) {
         // 获取保存到本地的网络类型
         let userDefaults = UserDefaults.standard

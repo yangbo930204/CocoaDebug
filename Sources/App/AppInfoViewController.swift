@@ -31,7 +31,7 @@ class AppInfoViewController: UITableViewController {
     
     var naviItemTitleLabel: UILabel?
     
-    //MARK: - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,7 +84,7 @@ class AppInfoViewController: UITableViewController {
         labelCrashCount.textColor = count > 0 ? .red : .white
     }
     
-    //MARK: - alert
+    // MARK: - alert
     func showAlert() {
         let alert = UIAlertController.init(title: nil, message: "You must restart APP to ensure the changes take effect", preferredStyle: .alert)
         let cancelAction = UIAlertAction.init(title: "Restart later", style: .cancel, handler: nil)
@@ -102,7 +102,7 @@ class AppInfoViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - target action
+    // MARK: - target action
     @objc func slowAnimationsSwitchChanged(sender: UISwitch) {
         CocoaDebugSettings.shared.slowAnimations = slowAnimationsSwitch.isOn
         //        self.showAlert()
@@ -143,20 +143,17 @@ class AppInfoViewController: UITableViewController {
     }
 }
 
-
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension AppInfoViewController {
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 56
         }
         return 38
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 && indexPath.row == 4 {
             if labelserverURL.text == nil || labelserverURL.text == "" {
                 return 0
@@ -166,8 +163,7 @@ extension AppInfoViewController {
         return 44
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 1 && indexPath.row == 2 {

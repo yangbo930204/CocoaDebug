@@ -54,8 +54,7 @@ class CrashLogger {
         didSet {
             if enable {
                 CrashLogger.shared.register()
-            }
-            else {
+            } else {
                 CrashLogger.shared.unregister()
             }
         }

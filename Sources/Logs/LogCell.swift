@@ -26,11 +26,11 @@ class LogCell: UITableViewCell {
             labelContent.textContainerInset = .zero
             labelContent.isUserInteractionEnabled = false
             
-            //tag
+            // tag
             if model.isTag == true {
                 self.contentView.backgroundColor = "#007aff".hexColor
             } else {
-                //isSelected
+                // isSelected
                 if model.isSelected == true {
                     self.contentView.backgroundColor = "#222222".hexColor
                 } else {
@@ -41,8 +41,7 @@ class LogCell: UITableViewCell {
     }
 }
 
-
-class CustomTextView : UITextView {
+class CustomTextView: UITextView {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -55,11 +54,9 @@ class CustomTextView : UITextView {
                 return false
             }
             return !text.isEmpty
-        }
-        else if action == #selector(paste(_:)) {
+        } else if action == #selector(paste(_:)) {
             return false
-        }
-        else if action == #selector(cut(_:)) {
+        } else if action == #selector(cut(_:)) {
             return false
         }
         

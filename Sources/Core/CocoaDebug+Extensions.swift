@@ -9,7 +9,7 @@
 import Foundation
 
 extension Dictionary {
-    ///JSON/Form format conversion
+    /// JSON/Form format conversion
     func dictionaryToFormString() -> String? {
         var array = [String]()
         
@@ -24,7 +24,7 @@ extension Dictionary {
 }
 
 extension String {
-    ///JSON/Form format conversion
+    /// JSON/Form format conversion
     func formStringToDictionary() -> [String: Any]? {
         var dictionary = [String: Any]()
         let array = self.components(separatedBy: "&")
@@ -44,12 +44,12 @@ extension String {
     }
 }
 
-//MARK: - *********************************************************************
+// MARK: - *********************************************************************
 
 extension Data {
     func dataToDictionary() -> [String: Any]? {
         do {
-            return try JSONSerialization.jsonObject(with: self, options: []) as? [String : Any]
+            return try JSONSerialization.jsonObject(with: self, options: []) as? [String: Any]
         } catch {
         }
         return nil
@@ -78,7 +78,7 @@ extension String {
     }
 }
 
-//MARK: - *********************************************************************
+// MARK: - *********************************************************************
 
 extension String {
     func stringToDictionary() -> [String: Any]? {
@@ -151,7 +151,7 @@ extension Data {
 
 extension Data {
     func dataToPrettyPrintString() -> String? {
-        //1.pretty json
+        // 1.pretty json
         if var json = self.dataToDictionary() {
             // 如果有需要解密的内容，回调出去解密再传回来
             if let block = CocoaDebug.decryptBlock {
@@ -166,10 +166,10 @@ extension Data {
     }
 }
 
-//MARK: - *********************************************************************
+// MARK: - *********************************************************************
 
-//https://gist.github.com/arshad/de147c42d7b3063ef7bc
-///Color
+// https://gist.github.com/arshad/de147c42d7b3063ef7bc
+/// Color
 extension String {
     var hexColor: UIColor {
         let hex = trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -200,7 +200,7 @@ extension UIView {
     }
 }
 
-//extension NSObject {
+// extension NSObject {
 //    func dispatch_main_async_safe(callback: @escaping ()->Void ) {
 //        if Thread.isMainThread {
 //            callback()
@@ -210,10 +210,10 @@ extension UIView {
 //            })
 //        }
 //    }
-//}
+// }
 
-//https://stackoverflow.com/questions/26244293/scrolltorowatindexpath-with-uitableview-does-not-work
-///tableView
+// https://stackoverflow.com/questions/26244293/scrolltorowatindexpath-with-uitableview-does-not-work
+/// tableView
 extension UITableView {
     func tableViewScrollToBottom(animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
@@ -237,18 +237,17 @@ extension UITableView {
         self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: animated)
     }
     
-    func reloadData(completion: @escaping () -> ()) {
-        UIView.animate(withDuration: 0, animations: { self.reloadData()})
-            {_ in completion() }
+    func reloadData(completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0, animations: { self.reloadData()}) {_ in completion() }
     }
 }
 
-///shake
+/// shake
 extension UIWindow {
     
-    private static var _cocoadebugShakeProperty = [String:Bool]()
+    private static var _cocoadebugShakeProperty = [String: Bool]()
     
-    var cocoadebugShakeProperty:Bool {
+    var cocoadebugShakeProperty: Bool {
         get {
             let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
             return UIWindow._cocoadebugShakeProperty[tmpAddress] ?? false
@@ -258,7 +257,6 @@ extension UIWindow {
             UIWindow._cocoadebugShakeProperty[tmpAddress] = newValue
         }
     }
-    
     
     open override var canBecomeFirstResponder: Bool {
         return true
@@ -292,13 +290,11 @@ extension UIWindow {
     }
 }
 
-
-///CocoaDebug
+/// CocoaDebug
 extension CocoaDebug {
     
-    ///init
-    static func initializationMethod(serverURL: String? = nil, ignoredURLs: [String]? = nil, onlyURLs: [String]? = nil, ignoredPrefixLogs: [String]? = nil, onlyPrefixLogs: [String]? = nil, additionalViewController: UIViewController? = nil, emailToRecipients: [String]? = nil, emailCcRecipients: [String]? = nil, mainColor: String? = nil, protobufTransferMap: [String: [String]]? = nil)
-    {
+    /// init
+    static func initializationMethod(serverURL: String? = nil, ignoredURLs: [String]? = nil, onlyURLs: [String]? = nil, ignoredPrefixLogs: [String]? = nil, onlyPrefixLogs: [String]? = nil, additionalViewController: UIViewController? = nil, emailToRecipients: [String]? = nil, emailCcRecipients: [String]? = nil, mainColor: String? = nil, protobufTransferMap: [String: [String]]? = nil) {
         if serverURL == nil {
             CocoaDebugSettings.shared.serverURL = ""
         } else {
@@ -327,10 +323,10 @@ extension CocoaDebug {
             CocoaDebugSettings.shared.onlyPrefixLogs = onlyPrefixLogs
         }
         
-        if CocoaDebugSettings.shared.firstIn == nil {//first launch
+        if CocoaDebugSettings.shared.firstIn == nil {// first launch
             CocoaDebugSettings.shared.firstIn = ""
             CocoaDebugSettings.shared.showBubbleAndWindow = true
-        } else {//not first launch
+        } else {// not first launch
             CocoaDebugSettings.shared.showBubbleAndWindow = CocoaDebugSettings.shared.showBubbleAndWindow
         }
         
@@ -345,17 +341,17 @@ extension CocoaDebug {
         var _ = _OCLogStoreManager.shared()
         CocoaDebugSettings.shared.responseShake = true
         
-        //share via email
+        // share via email
         CocoaDebugSettings.shared.emailToRecipients = emailToRecipients
         CocoaDebugSettings.shared.emailCcRecipients = emailCcRecipients
         
-        //color
+        // color
         CocoaDebugSettings.shared.mainColor = mainColor ?? "#42d459"
         
-        //slow animations
+        // slow animations
         CocoaDebugSettings.shared.slowAnimations = false
         
-        //log
+        // log
         let enableLogMonitoring = UserDefaults.standard.bool(forKey: "enableLogMonitoring_CocoaDebug")
         if enableLogMonitoring == false {
             _SwiftLogHelper.shared.enable = false
@@ -365,7 +361,7 @@ extension CocoaDebug {
 //            _OCLogHelper.shared()?.enable = true
         }
         
-        //network
+        // network
         let disableNetworkMonitoring = UserDefaults.standard.bool(forKey: "disableNetworkMonitoring_CocoaDebug")
         if disableNetworkMonitoring == true {
             _NetworkHelper.shared().disable()
@@ -374,7 +370,7 @@ extension CocoaDebug {
         }
     }
     
-    ///deinit
+    /// deinit
     static func deinitializationMethod() {
         WindowHelper.shared.disable()
         _NetworkHelper.shared().disable()
@@ -384,5 +380,3 @@ extension CocoaDebug {
         CocoaDebugSettings.shared.responseShake = false
     }
 }
-
-

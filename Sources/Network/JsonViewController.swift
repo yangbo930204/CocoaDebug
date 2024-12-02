@@ -28,36 +28,36 @@ class JsonViewController: UIViewController {
     var httpModel: _HttpModel?
     var detailModel: NetworkDetailModel?
     
-    //Edited url
+    // Edited url
     var editedURLString: String?
-    //Edited content
+    // Edited content
     var editedContent: String?
     
-    //log
+    // log
     var logTitleString: String?
     var logModels: [_OCLogModel]?
     var logModel: _OCLogModel?
-    var justCancelCallback:(() -> Void)?
+    var justCancelCallback: (() -> Void)?
     
     static func instanceFromStoryBoard() -> JsonViewController {
         let storyboard = UIStoryboard(name: "Network", bundle: Bundle(for: CocoaDebug.self))
         return storyboard.instantiateViewController(withIdentifier: "JsonViewController") as! JsonViewController
     }
     
-    //MARK: - tool
+    // MARK: - tool
     
-    //detect format (JSON/Form)
+    // detect format (JSON/Form)
     func detectSerializer() {
         guard let content = detailModel?.content else {
-            detailModel?.requestSerializer = RequestSerializer.JSON//default JSON format
+            detailModel?.requestSerializer = RequestSerializer.JSON// default JSON format
             return
         }
         
         if let _ = content.stringToDictionary() {
-            //JSON format
+            // JSON format
             detailModel?.requestSerializer = RequestSerializer.JSON
         } else {
-            //Form format
+            // Form format
             detailModel?.requestSerializer = RequestSerializer.form
             
             if let jsonString = detailModel?.content?.formStringToJsonString() {
@@ -68,8 +68,7 @@ class JsonViewController: UIViewController {
         }
     }
     
-    
-    //MARK: - init
+    // MARK: - init
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        navigationController?.hidesBarsOnSwipe = true
@@ -105,7 +104,7 @@ class JsonViewController: UIViewController {
         textView.textContainer.lineFragmentPadding = 15
         //        textView.textContainerInset = .zero
         
-        //detect type (default type URL)
+        // detect type (default type URL)
         if detailModel?.title == "REQUEST HEADER" {
             editType = .requestHeader
         }
@@ -113,21 +112,16 @@ class JsonViewController: UIViewController {
             editType = .responseHeader
         }
         
-        //setup UI
-        if editType == .requestHeader
-        {
+        // setup UI
+        if editType == .requestHeader {
             imageView.isHidden = true
             textView.isHidden = false
             textView.text = String(detailModel?.requestHeaderFields?.dictionaryToString()?.dropFirst().dropLast().dropFirst().dropLast().dropFirst().dropFirst() ?? "").replacingOccurrences(of: "\",\n  \"", with: "\",\n\"")
-        }
-        else if editType == .responseHeader
-        {
+        } else if editType == .responseHeader {
             imageView.isHidden = true
             textView.isHidden = false
             textView.text = String(detailModel?.responseHeaderFields?.dictionaryToString()?.dropFirst().dropLast().dropFirst().dropLast().dropFirst().dropFirst() ?? "").replacingOccurrences(of: "\",\n  \"", with: "\",\n\"")
-        }
-        else if editType == .log
-        {
+        } else if editType == .log {
             imageView.isHidden = true
             textView.isHidden = false
             naviItemTitleLabel?.text = logTitleString
@@ -135,14 +129,12 @@ class JsonViewController: UIViewController {
             if let data = logModel?.contentData {
                 textView.text = data.dataToString()
             }
-        }
-        else
-        {
+        } else {
             if let content = detailModel?.content {
                 imageView.isHidden = true
                 textView.isHidden = false
                 textView.text = content
-                detectSerializer()//detect format (JSON/Form)
+                detectSerializer()// detect format (JSON/Form)
             }
             if let image = detailModel?.image {
                 textView.isHidden = true

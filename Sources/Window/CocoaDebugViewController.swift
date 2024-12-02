@@ -56,7 +56,7 @@ class CocoaDebugViewController: UIViewController {
     }
 }
 
-//MARK: - BubbleDelegate
+// MARK: - BubbleDelegate
 extension CocoaDebugViewController: BubbleDelegate {
     
     func didTapBubble() {

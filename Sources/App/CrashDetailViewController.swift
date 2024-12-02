@@ -24,7 +24,7 @@ class CrashDetailViewController: UITableViewController {
         return storyboard.instantiateViewController(withIdentifier: "CrashDetailViewController") as! CrashDetailViewController
     }
     
-    //MARK - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +49,7 @@ class CrashDetailViewController: UITableViewController {
     }
 }
 
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension CrashDetailViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

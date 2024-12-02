@@ -438,27 +438,6 @@ static NSString *kOurRecursiveRequestFlagProperty = @"com.apple.dts.CustomHTTPPr
     if (self.request.HTTPBodyStream) {//liman
         NSData *data = [NSData dataWithInputStream:self.request.HTTPBodyStream];
         model.requestData = data;
-
-        if ([_NetworkHelper shared].addRealAddress) {
-            NSError *error;
-            // 将NSData对象解析为JSON对象（字典或数组）
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-
-            if (error) {
-                // 处理JSON解析错误
-            } else if ([json isKindOfClass:[NSDictionary class]]) {
-                // 将JSON对象转换为字典
-                NSDictionary *dictionary = (NSDictionary *)json;
-
-                if ([dictionary objectForKey:@"RealAddress"]) {
-                    NSString *realAddress = [dictionary objectForKey:@"RealAddress"];
-
-                    if (realAddress && [realAddress isKindOfClass:[NSString class]]) {
-                        model.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.request.URL.absoluteString, realAddress]];
-                    }
-                }
-            }
-        }
     }
 
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)self.response;

@@ -11,17 +11,17 @@ import UIKit
 
 class IgnoredURLsViewController: UITableViewController {
     
-    var ignoredURLs: Array<String>?
-    var onlyURLs: Array<String>?
+    var ignoredURLs: [String]?
+    var onlyURLs: [String]?
     
-    var ignoredPrefixLogs: Array<String>?
-    var onlyPrefixLogs: Array<String>?
+    var ignoredPrefixLogs: [String]?
+    var onlyPrefixLogs: [String]?
     
     @IBOutlet weak var naviItem: UINavigationItem!
     
     var naviItemTitleLabel: UILabel?
     
-    //MARK: - init
+    // MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +42,7 @@ class IgnoredURLsViewController: UITableViewController {
     }
 }
 
-//MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension IgnoredURLsViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,7 +107,7 @@ extension IgnoredURLsViewController {
     }
 }
 
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension IgnoredURLsViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
