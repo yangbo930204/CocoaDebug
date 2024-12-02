@@ -1,5 +1,5 @@
 PODS:
-  - CocoaDebug (1.7.5)
+  - CocoaDebug (1.7.7)
 
 DEPENDENCIES:
   - CocoaDebug (from `../../CocoaDebug`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../../CocoaDebug"
 
 SPEC CHECKSUMS:
-  CocoaDebug: fab63960955ae3ea6d50d599e9db1f17e364fe80
+  CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
 
 PODFILE CHECKSUM: 798a083c75a55b21bc70b746bf99ec35c566185e
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.16.2
